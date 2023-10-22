@@ -19,10 +19,20 @@ class _HomeState extends State<Home> {
     return Scaffold(
       // stack for background image / main page
       body: SingleChildScrollView(
-        child: Stack(children: [
-          Image.asset('lib/assets/images/background.png', fit: BoxFit.fill),
-          const ControlHub(),
-        ]),
+        child: Stack(
+          children: [
+            Image.asset('lib/assets/images/background.png', fit: BoxFit.fill),
+            SizedBox(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              child: const Column(
+                children: [
+                  ControlHub(),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
