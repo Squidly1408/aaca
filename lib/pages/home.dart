@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // widgets
 import '../widgets/control_hub.dart';
+import '../widgets/small_button.dart';
 
 // pages
 
@@ -25,9 +26,30 @@ class _HomeState extends State<Home> {
             SizedBox(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
-              child: const Column(
+              child: Column(
                 children: [
-                  ControlHub(),
+                  const ControlHub(),
+                  GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: (MediaQuery.of(context).size.width / 120)
+                          .floor()
+                          .toInt(),
+                    ),
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: 30,
+                    itemBuilder: (context, index) {
+                      return const Center(
+                        child: SmallButton(
+                          backgroundColour: Color(0x77171717),
+                          text: 'testing text',
+                          textColour: Colors.white,
+                          icon: Icons.tag_faces_outlined,
+                          iconColour: Colors.white,
+                        ),
+                      );
+                    },
+                  )
                 ],
               ),
             ),
