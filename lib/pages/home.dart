@@ -19,51 +19,45 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       // stack for background image / main page
-      body: SizedBox(
-        height: MediaQuery.of(context).size.height,
-        child: SingleChildScrollView(
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: Stack(
-              alignment: AlignmentDirectional.center,
+      body: SingleChildScrollView(
+        child: Stack(
+          alignment: AlignmentDirectional.topCenter,
+          children: [
+            // background image
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: Image.asset('lib/assets/images/background.png',
+                  fit: BoxFit.cover),
+            ),
+            // gridview.builder of apps
+            Column(
               children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  child: Image.asset('lib/assets/images/background.png',
-                      fit: BoxFit.cover),
-                ),
-                Column(
-                  children: [
-                    const ControlHub(),
-                    GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount:
-                            (MediaQuery.of(context).size.width / 120)
-                                .floor()
-                                .toInt(),
+                const ControlHub(),
+                GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: (MediaQuery.of(context).size.width / 120)
+                        .floor()
+                        .toInt(),
+                  ),
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: 30,
+                  itemBuilder: (context, index) {
+                    return const Center(
+                      child: SmallButton(
+                        backgroundColour: Color(0x77171717),
+                        text: 'testing text',
+                        textColour: Colors.white,
+                        icon: Icons.tag_faces_outlined,
+                        iconColour: Colors.white,
                       ),
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: 30,
-                      itemBuilder: (context, index) {
-                        return const Center(
-                          child: SmallButton(
-                            backgroundColour: Color(0x77171717),
-                            text: 'testing text',
-                            textColour: Colors.white,
-                            icon: Icons.tag_faces_outlined,
-                            iconColour: Colors.white,
-                          ),
-                        );
-                      },
-                    )
-                  ],
-                ),
+                    );
+                  },
+                )
               ],
             ),
-          ),
+          ],
         ),
       ),
     );
