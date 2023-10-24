@@ -1,6 +1,9 @@
 // packages
 import 'package:flutter/material.dart';
 
+// Pages
+import '../pages/settings.dart';
+
 class ControlHub extends StatefulWidget {
   const ControlHub({super.key});
 
@@ -56,7 +59,13 @@ class _ControlHubState extends State<ControlHub> {
                           ),
                           // settings button
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Settings()),
+                              );
+                            },
                             icon: const Icon(
                               Icons.settings,
                               color: Colors.white,
