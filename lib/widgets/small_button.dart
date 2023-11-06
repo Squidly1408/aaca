@@ -1,4 +1,9 @@
+// packages
+import 'package:aaca/pages/settings/general/voice_setting.dart';
 import 'package:flutter/material.dart';
+
+// pages
+import '../widgets/control_hub.dart';
 
 class SmallButton extends StatefulWidget {
   const SmallButton({
@@ -33,7 +38,15 @@ class _SmallButtonState extends State<SmallButton> {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      onPressed: () {},
+      onPressed: () {
+        setState(
+          () {
+            spokenText = spokenText + widget.text;
+            textNotifier.value = textNotifier.value + 1;
+            speak(spokenText);
+          },
+        );
+      },
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

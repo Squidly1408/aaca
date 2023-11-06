@@ -20,7 +20,7 @@ class AppsSetting extends StatefulWidget {
   State<AppsSetting> createState() => _AppsSettingState();
 }
 
-var notifier = ValueNotifier(0);
+var appNotifier = ValueNotifier(0);
 
 class _AppsSettingState extends State<AppsSetting> {
   @override
@@ -39,7 +39,7 @@ class _AppsSettingState extends State<AppsSetting> {
                 appList.removeAt(widget.index);
                 setting = const AboutApp();
                 notifier1.value = !notifier1.value;
-                notifier.value = notifier.value + 1;
+                appNotifier.value = appNotifier.value + 1;
               });
             },
             child: const Text('Delete'),
@@ -53,7 +53,7 @@ class _AppsSettingState extends State<AppsSetting> {
                     setState(() {
                       appList[widget.index].icon = Icons.text_fields_outlined;
                       setting = AboutApp();
-                      notifier.value = notifier.value + 1;
+                      appNotifier.value = appNotifier.value + 1;
                     });
                   },
                   icon: const Icon(Icons.text_fields_outlined),
@@ -62,7 +62,7 @@ class _AppsSettingState extends State<AppsSetting> {
                   onPressed: () {
                     setState(() {
                       appList[widget.index].icon = Icons.tag_faces;
-                      notifier.value = notifier.value + 1;
+                      appNotifier.value = appNotifier.value + 1;
                     });
                   },
                   icon: const Icon(Icons.tag_faces),
@@ -71,7 +71,7 @@ class _AppsSettingState extends State<AppsSetting> {
                   onPressed: () {
                     setState(() {
                       appList[widget.index].icon = Icons.tag;
-                      notifier.value = notifier.value + 1;
+                      appNotifier.value = appNotifier.value + 1;
                     });
                   },
                   icon: const Icon(Icons.tag),
@@ -86,7 +86,7 @@ class _AppsSettingState extends State<AppsSetting> {
             onSubmitted: (value) {
               setState(() {
                 appList[widget.index].text = _newText.text;
-                notifier.value = notifier.value + 1;
+                appNotifier.value = appNotifier.value + 1;
               });
             },
           ),
@@ -94,7 +94,7 @@ class _AppsSettingState extends State<AppsSetting> {
             onPressed: () {
               setState(() {
                 appList[widget.index].text = _newText.text;
-                notifier.value = notifier.value + 1;
+                appNotifier.value = appNotifier.value + 1;
               });
             },
             child: const Text('submit'),

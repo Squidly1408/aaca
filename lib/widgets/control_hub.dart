@@ -1,4 +1,5 @@
 // packages
+import 'package:aaca/pages/settings/general/voice_setting.dart';
 import 'package:flutter/material.dart';
 
 // Pages
@@ -11,18 +12,14 @@ class ControlHub extends StatefulWidget {
   State<ControlHub> createState() => _ControlHubState();
 }
 
+String spokenText = '';
+var textNotifier = ValueNotifier(0);
+
 class _ControlHubState extends State<ControlHub> {
-// save texts on/off
-  final bool _saveText = true;
+  bool history = true;
 
 // saved text string list
-  final _savedText = <String>[
-    'Anne Spruce',
-    'Michelle',
-    'Jacqualine Newman-Adam',
-    'Alex Newman-Adam',
-    'Lucas Newman',
-  ];
+  final _savedText = [];
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +35,7 @@ class _ControlHubState extends State<ControlHub> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
-              height: _saveText
+              height: history
                   ? MediaQuery.of(context).size.height * 0.2
                   : MediaQuery.of(context).size.height * 0.15,
               // main row
@@ -76,18 +73,27 @@ class _ControlHubState extends State<ControlHub> {
                       ),
                       // main text area
                       MaterialButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          speak(spokenText);
+                        },
                         child: Container(
                           decoration: BoxDecoration(
                               color: const Color(0xffffffff),
                               borderRadius: BorderRadius.circular(18)),
                           height: MediaQuery.of(context).size.height * 0.125,
                           width: MediaQuery.of(context).size.width * 0.6,
-                          child: const Padding(
-                            padding: EdgeInsets.all(8.0),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: Center(
-                              child:
-                                  Text('hello', style: TextStyle(fontSize: 20)),
+                              child: ValueListenableBuilder(
+                                valueListenable: textNotifier,
+                                builder: (context, value, child) {
+                                  return Text(
+                                    spokenText,
+                                    style: const TextStyle(fontSize: 20),
+                                  );
+                                },
+                              ),
                             ),
                           ),
                         ),
@@ -98,23 +104,35 @@ class _ControlHubState extends State<ControlHub> {
                         children: [
                           // Text button
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                spokenText = '';
+                                textNotifier.value = textNotifier.value + 1;
+                              });
+                            },
                             icon: const Icon(
-                              Icons.message,
+                              Icons.delete,
                               color: Colors.white,
                               size: 30,
                             ),
                           ),
                           // save button
-                          Visibility(
-                            visible: _saveText,
-                            child: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.save_alt,
-                                color: Colors.white,
-                                size: 30,
-                              ),
+                          IconButton(
+                            onPressed: () {
+                              if (_savedText.length >= 5) {
+                                setState(() {
+                                  _savedText.removeAt(0);
+                                });
+                              }
+                              setState(() {
+                                _savedText.add(spokenText);
+                              });
+                              speak(spokenText);
+                            },
+                            icon: const Icon(
+                              Icons.message,
+                              color: Colors.white,
+                              size: 30,
                             ),
                           ),
                         ],
@@ -130,7 +148,9 @@ class _ControlHubState extends State<ControlHub> {
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            speak(_savedText[index]);
+                          },
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 8),
                             child: Text(_savedText[index].toString(),

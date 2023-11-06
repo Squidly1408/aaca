@@ -122,14 +122,14 @@ class _SettingsState extends State<Settings> {
                         child: Column(
                           children: [
                             ValueListenableBuilder(
-                              valueListenable: notifier,
+                              valueListenable: appNotifier,
                               builder: (context, value, child) {
                                 return ListView.builder(
                                   physics: const NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
                                   itemBuilder: (context, index) {
                                     return ListenableBuilder(
-                                      listenable: notifier,
+                                      listenable: appNotifier,
                                       builder: (context, child) {
                                         return _CustomListTile(
                                           title: appList[index].text,
@@ -137,7 +137,7 @@ class _SettingsState extends State<Settings> {
                                           setting: AppsSetting(
                                               text: appList[index].text,
                                               index: index,
-                                              update: notifier),
+                                              update: appNotifier),
                                         );
                                       },
                                     );
@@ -147,7 +147,7 @@ class _SettingsState extends State<Settings> {
                               },
                             ),
                             ValueListenableBuilder(
-                              valueListenable: notifier,
+                              valueListenable: appNotifier,
                               builder: (context, value, child) {
                                 return Column(
                                   children: [
@@ -275,12 +275,3 @@ class _SingleSection extends StatelessWidget {
     );
   }
 }
-
-
-
-// control bar setting
-
-
-
-
-
