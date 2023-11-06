@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 // widgets
+import '../data/apps_list.dart';
 import '../widgets/control_hub.dart';
 import '../widgets/small_button.dart';
 
@@ -42,14 +43,14 @@ class _HomeState extends State<Home> {
                   ),
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: 30,
+                  itemCount: appList.length,
                   itemBuilder: (context, index) {
-                    return const Center(
+                    return Center(
                       child: SmallButton(
-                        backgroundColour: Color(0x77171717),
-                        text: 'testing text',
+                        backgroundColour: const Color(0x77171717),
+                        text: appList[index].text,
                         textColour: Colors.white,
-                        icon: Icons.tag_faces_outlined,
+                        icon: appList[index].icon,
                         iconColour: Colors.white,
                       ),
                     );

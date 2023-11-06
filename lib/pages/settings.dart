@@ -1,9 +1,21 @@
 // Packages
+import 'package:aaca/models/app.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // pages
+import '../data/apps_list.dart';
 import 'home.dart';
+
+// setting pages
+import 'settings/apps.dart';
+import 'settings/general/about_app.dart';
+import 'settings/general/control_bar.dart';
+import 'settings/general/parental_lock.dart';
+import 'settings/general/voice_setting.dart';
+import 'settings/theming/background.dart';
+import 'settings/theming/control_bar.dart';
+import 'settings/theming/general_apps.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -12,9 +24,9 @@ class Settings extends StatefulWidget {
   State<Settings> createState() => _SettingsState();
 }
 
-ValueNotifier<bool> _notifier = ValueNotifier(false);
+ValueNotifier<bool> notifier1 = ValueNotifier(false);
 
-Widget _setting = const _AboutApp();
+Widget setting = const AboutApp();
 
 class _SettingsState extends State<Settings> {
   @override
@@ -49,22 +61,22 @@ class _SettingsState extends State<Settings> {
                       _CustomListTile(
                         title: "About App",
                         icon: Icons.tablet_mac,
-                        setting: _AboutApp(),
+                        setting: AboutApp(),
                       ),
                       _CustomListTile(
                         title: "Parental Lock",
                         icon: CupertinoIcons.lock_shield,
-                        setting: _ParentalLock(),
+                        setting: ParentalLock(),
                       ),
                       _CustomListTile(
                         title: "Control Bar",
                         icon: Icons.table_chart,
-                        setting: _ParentalLock(),
+                        setting: ControlBar(),
                       ),
                       _CustomListTile(
                         title: "Voice settings",
                         icon: CupertinoIcons.volume_up,
-                        setting: _ParentalLock(),
+                        setting: VoiceSetting(),
                       ),
                     ],
                   ),
@@ -74,30 +86,116 @@ class _SettingsState extends State<Settings> {
                       _CustomListTile(
                         title: "General Apps",
                         icon: Icons.widgets,
-                        setting: _ParentalLock(),
+                        setting: GeneralAppTheming(),
                       ),
                       _CustomListTile(
                         title: "Background",
                         icon: CupertinoIcons
                             .rectangle_fill_on_rectangle_angled_fill,
-                        setting: _ParentalLock(),
+                        setting: Background(),
                       ),
                       _CustomListTile(
                         title: "Control Bar",
                         icon: Icons.table_chart,
-                        setting: _ParentalLock(),
+                        setting: ControlBarTheming(),
                       ),
                     ],
                   ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 16),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Apps',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline3
+                              ?.copyWith(fontSize: 16),
+                        ),
+                      ),
+                      Container(
+                        width: double.infinity,
+                        color: Colors.white,
+                        child: Column(
+                          children: [
+                            ValueListenableBuilder(
+                              valueListenable: notifier,
+                              builder: (context, value, child) {
+                                return ListView.builder(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemBuilder: (context, index) {
+                                    return ListenableBuilder(
+                                      listenable: notifier,
+                                      builder: (context, child) {
+                                        return _CustomListTile(
+                                          title: appList[index].text,
+                                          icon: appList[index].icon,
+                                          setting: AppsSetting(
+                                              text: appList[index].text,
+                                              index: index,
+                                              update: notifier),
+                                        );
+                                      },
+                                    );
+                                  },
+                                  itemCount: appList.length,
+                                );
+                              },
+                            ),
+                            ValueListenableBuilder(
+                              valueListenable: notifier,
+                              builder: (context, value, child) {
+                                return Column(
+                                  children: [
+                                    Visibility(
+                                      visible:
+                                          appList.length >= 40 ? true : false,
+                                      child: const Center(
+                                        child: Text(
+                                            'Maximum Amount of Buttons Reached!'),
+                                      ),
+                                    ),
+                                    Visibility(
+                                      visible:
+                                          appList.length < 40 ? true : false,
+                                      child: Center(
+                                        child: MaterialButton(
+                                          child: const Icon(Icons.add),
+                                          onPressed: () {
+                                            setState(() {
+                                              if (appList.length < 40) {
+                                                appList.add(
+                                                  App('New App',
+                                                      Icons.now_widgets),
+                                                );
+                                              }
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),
             const VerticalDivider(thickness: 3),
             Expanded(
               child: ValueListenableBuilder(
-                valueListenable: _notifier,
+                valueListenable: notifier1,
                 builder: (context, value, child) {
-                  return _setting;
+                  return setting;
                 },
               ),
             ),
@@ -134,9 +232,9 @@ class _CustomListTileState extends State<_CustomListTile> {
       trailing: widget.trailing ?? const Icon(CupertinoIcons.forward, size: 18),
       onTap: () {
         setState(() {
-          _setting = widget.setting;
+          setting = widget.setting;
         });
-        _notifier.value = !_notifier.value;
+        notifier1.value = !notifier1.value;
       },
     );
   }
@@ -178,34 +276,11 @@ class _SingleSection extends StatelessWidget {
   }
 }
 
-class _AboutApp extends StatefulWidget {
-  const _AboutApp({super.key});
 
-  @override
-  State<_AboutApp> createState() => __AboutAppState();
-}
 
-class __AboutAppState extends State<_AboutApp> {
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('About app'),
-    );
-  }
-}
+// control bar setting
 
-class _ParentalLock extends StatefulWidget {
-  const _ParentalLock({super.key});
 
-  @override
-  State<_ParentalLock> createState() => __ParentalLockState();
-}
 
-class __ParentalLockState extends State<_ParentalLock> {
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Parental Lock'),
-    );
-  }
-}
+
+
