@@ -14,10 +14,12 @@ class ControlHub extends StatefulWidget {
 
 String spokenText = '';
 var textNotifier = ValueNotifier(0);
+Color controlHubBGColour = const Color(0x77171717);
+Color controlHubIconColour = const Color(0xffffffff);
+bool ifSavedText = true;
+Color savedTextColor = const Color(0xffffffff);
 
 class _ControlHubState extends State<ControlHub> {
-  bool history = true;
-
 // saved text string list
   final _savedText = [];
 
@@ -31,11 +33,11 @@ class _ControlHubState extends State<ControlHub> {
         // background card
         child: Card(
           // card colour / opacity
-          color: const Color(0x77171717),
+          color: controlHubBGColour,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
-              height: history
+              height: ifSavedText
                   ? MediaQuery.of(context).size.height * 0.2
                   : MediaQuery.of(context).size.height * 0.15,
               // main row
@@ -52,7 +54,8 @@ class _ControlHubState extends State<ControlHub> {
                           SizedBox(
                             height: 60,
                             child: Image.asset('lib/assets/images/logo.png',
-                                fit: BoxFit.fitHeight),
+                                fit: BoxFit.fitHeight,
+                                color: controlHubIconColour),
                           ),
                           // settings button
                           IconButton(
@@ -63,9 +66,9 @@ class _ControlHubState extends State<ControlHub> {
                                     builder: (context) => const Settings()),
                               );
                             },
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.settings,
-                              color: Colors.white,
+                              color: controlHubIconColour,
                               size: 30,
                             ),
                           ),
@@ -110,9 +113,9 @@ class _ControlHubState extends State<ControlHub> {
                                 textNotifier.value = textNotifier.value + 1;
                               });
                             },
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.delete,
-                              color: Colors.white,
+                              color: controlHubIconColour,
                               size: 30,
                             ),
                           ),
@@ -129,9 +132,9 @@ class _ControlHubState extends State<ControlHub> {
                               });
                               speak(spokenText);
                             },
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.message,
-                              color: Colors.white,
+                              color: controlHubIconColour,
                               size: 30,
                             ),
                           ),
@@ -140,25 +143,32 @@ class _ControlHubState extends State<ControlHub> {
                     ],
                   ),
                   // saved text section
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.05,
-                    child: ListView.builder(
-                      itemCount: _savedText.length,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return TextButton(
-                          onPressed: () {
-                            speak(_savedText[index]);
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            child: Text(_savedText[index].toString(),
-                                style:
-                                    const TextStyle(color: Color(0xffffffff))),
-                          ),
-                        );
-                      },
+                  Visibility(
+                    visible: ifSavedText,
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.05,
+                      child: ListView.builder(
+                        itemCount: _savedText.length,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return TextButton(
+                            onPressed: () {
+                              speak(_savedText[index]);
+                            },
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
+                              child: Text(
+                                _savedText[index].toString(),
+                                style: TextStyle(
+                                  color: savedTextColor,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   )
                 ],
