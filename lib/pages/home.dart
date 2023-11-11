@@ -1,4 +1,5 @@
 // packages
+import 'package:aaca/data/default_theming.dart';
 import 'package:flutter/material.dart';
 
 // widgets
@@ -49,9 +50,13 @@ class _HomeState extends State<Home> {
                       child: SmallButton(
                         backgroundColour: const Color(0x77171717),
                         text: appList[index].text,
-                        textColour: Colors.white,
+                        textColour: appList[index].individual
+                            ? appList[index].txtColour
+                            : defaultTheming[0].txtColour,
                         icon: appList[index].icon,
-                        iconColour: Colors.white,
+                        iconColour: appList[index].individual
+                            ? appList[index].mnColour
+                            : defaultTheming[0].mnColour,
                       ),
                     );
                   },

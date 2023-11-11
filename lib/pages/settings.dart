@@ -169,8 +169,17 @@ class _SettingsState extends State<Settings> {
                                             setState(() {
                                               if (appList.length < 40) {
                                                 appList.add(
-                                                  App('New App',
-                                                      Icons.now_widgets),
+                                                  App(
+                                                    text: 'New App',
+                                                    icon: Icons.now_widgets,
+                                                    individual: false,
+                                                    txtColour:
+                                                        const Color(0xffffffff),
+                                                    mnColour:
+                                                        const Color(0xffffffff),
+                                                    bgColour:
+                                                        const Color(0x33ffffff),
+                                                  ),
                                                 );
                                               }
                                             });

@@ -98,7 +98,26 @@ class _AppsSettingState extends State<AppsSetting> {
               });
             },
             child: const Text('submit'),
-          )
+          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.3,
+            child: Row(
+              children: [
+                const Text('individual theming'),
+                Switch(
+                  value: appList[widget.index].individual,
+                  onChanged: (value) {
+                    setState(
+                      () {
+                        appList[widget.index].individual = value;
+                        appNotifier.value = appNotifier.value + 1;
+                      },
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

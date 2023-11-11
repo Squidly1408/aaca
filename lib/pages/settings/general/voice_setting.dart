@@ -22,7 +22,7 @@ Future speak(text) async {
   await flutterTts.setSpeechRate(_rate);
   await flutterTts.setPitch(_pitch);
 
-  if (spokenText!.isNotEmpty) {
+  if (spokenText.isNotEmpty) {
     await flutterTts.speak(text);
   }
 }

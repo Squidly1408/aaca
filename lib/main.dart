@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 // pages
 import 'pages/home.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
 }
 
