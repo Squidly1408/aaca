@@ -51,12 +51,12 @@ class _HomeState extends State<Home> {
                         backgroundColour: const Color(0x77171717),
                         text: appList[index].text,
                         textColour: appList[index].individual
-                            ? appList[index].txtColour
-                            : defaultTheming[0].txtColour,
-                        icon: appList[index].icon,
+                            ? Color(appList[index].txtColour)
+                            : Color(defaultTheming[0].txtColour),
+                        icon: IconData(appList[index].icon),
                         iconColour: appList[index].individual
-                            ? appList[index].mnColour
-                            : defaultTheming[0].mnColour,
+                            ? Color(appList[index].mnColour)
+                            : Color(defaultTheming[0].mnColour),
                       ),
                     );
                   },

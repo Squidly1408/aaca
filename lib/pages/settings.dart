@@ -133,7 +133,8 @@ class _SettingsState extends State<Settings> {
                                       builder: (context, child) {
                                         return _CustomListTile(
                                           title: appList[index].text,
-                                          icon: appList[index].icon,
+                                          icon: IconData(appList[index].icon,
+                                              fontFamily: 'MaterialIcons'),
                                           setting: AppsSetting(
                                               text: appList[index].text,
                                               index: index,
@@ -171,14 +172,18 @@ class _SettingsState extends State<Settings> {
                                                 appList.add(
                                                   App(
                                                     text: 'New App',
-                                                    icon: Icons.now_widgets,
+                                                    icon: Icons
+                                                        .now_widgets.codePoint,
                                                     individual: false,
                                                     txtColour:
-                                                        const Color(0xffffffff),
+                                                        const Color(0xffffffff)
+                                                            .value,
                                                     mnColour:
-                                                        const Color(0xffffffff),
+                                                        const Color(0xffffffff)
+                                                            .value,
                                                     bgColour:
-                                                        const Color(0x33ffffff),
+                                                        const Color(0x33ffffff)
+                                                            .value,
                                                   ),
                                                 );
                                               }

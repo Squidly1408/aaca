@@ -51,7 +51,8 @@ class _AppsSettingState extends State<AppsSetting> {
                 IconButton(
                   onPressed: () {
                     setState(() {
-                      appList[widget.index].icon = Icons.text_fields_outlined;
+                      appList[widget.index].icon =
+                          Icons.text_fields_outlined.codePoint;
                       setting = AboutApp();
                       appNotifier.value = appNotifier.value + 1;
                     });
@@ -61,7 +62,7 @@ class _AppsSettingState extends State<AppsSetting> {
                 IconButton(
                   onPressed: () {
                     setState(() {
-                      appList[widget.index].icon = Icons.tag_faces;
+                      appList[widget.index].icon = Icons.tag_faces.codePoint;
                       appNotifier.value = appNotifier.value + 1;
                     });
                   },
@@ -70,7 +71,7 @@ class _AppsSettingState extends State<AppsSetting> {
                 IconButton(
                   onPressed: () {
                     setState(() {
-                      appList[widget.index].icon = Icons.tag;
+                      appList[widget.index].icon = Icons.tag.codePoint;
                       appNotifier.value = appNotifier.value + 1;
                     });
                   },

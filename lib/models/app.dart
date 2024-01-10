@@ -6,13 +6,13 @@ class App {
   // apps data
   int? id;
   String text;
-  IconData icon;
+  int icon;
   bool individual;
 
   // apps theming
-  Color bgColour;
-  Color mnColour;
-  Color txtColour;
+  int bgColour;
+  int mnColour;
+  int txtColour;
 
   App({
     // apps data
