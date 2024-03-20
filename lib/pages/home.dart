@@ -1,4 +1,6 @@
 // packages
+import 'dart:ffi';
+
 import 'package:aaca/data/default_theming.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +19,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  List<Map<String, dynamic>> _apps = [];
+  bool _isloading = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

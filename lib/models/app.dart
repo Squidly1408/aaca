@@ -1,6 +1,3 @@
-// packages
-import 'package:flutter/material.dart';
-
 // app model
 class App {
   // apps data
