@@ -1,16 +1,19 @@
-# aaca
 
-A new Flutter project.
+![Logo](https://raw.githubusercontent.com/Squidly1408/Squidly1408/main/images/Squidly1408.png)
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+# AACA
 
-A few resources to get you started if this is your first Flutter project:
+AACA or augmentative and alternative communication app is an app just like the name suggests, its meant for augmentative and alternative communication. How? well through the use of buttons and a TTS API powered by Flutter. \
+This apps design was to create an app that was free to use and that improved on current apps on the market by improving on customizability, user interactions, parantal controls, and making sure the use of the app was designed for that one person not being designed to fit mutliple peoples needs at once.
+## 🛠 Skills used
+Flutter, Dart, Canva, UI & UX design.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+\
+\
+\
+\
+\
+If you have any feedback, please reach out to us at Squidly1408@Gmail.com
+
