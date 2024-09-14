@@ -1,5 +1,4 @@
-
-![Logo](https://raw.githubusercontent.com/Squidly1408/Squidly1408/main/images/Squidly1408.png)
+![Logo](https://raw.githubusercontent.com/Squidly1408/aaca/main/lib/assets/images/JD%20devices%20logo.png)
 
 
 # AACA
@@ -17,3 +16,15 @@ Flutter, Dart, Canva, UI & UX design.
 \
 If you have any feedback, please reach out to us at Squidly1408@Gmail.com
 
+
+
+## images
+![Logo](https://raw.githubusercontent.com/Squidly1408/aaca/main/lib/assets/images/Capture.png)
+
+
+\
+\
+\
+\
+\
+If you have any feedback, please reach out to us at Squidly1408@Gmail.com
